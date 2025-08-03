@@ -22,13 +22,12 @@ jobs:
           make vars
           make batocera-docker-image
           make x86_64-show-build-order
-          make x86_64-pkg PKG=toolchain-buildroot
-          make x86_64-pkg PKG=toolchain
+          make x86_64-pkg PKG=glibc
           
       - name: Create tarballs
         run: | 
           tar -czvf /tmp/dl.tar.gz dl
-          tar -czvf /tmp/output.tar.gz output
+#          tar -czvf /tmp/output.tar.gz output
 
       - name: Upload tarballs
         uses: actions/upload-artifact@v4
@@ -36,4 +35,4 @@ jobs:
           name: build-tarballs
           path: |
             /tmp/dl.tar.gz
-            /tmp/output.tar.gz
+#            /tmp/output.tar.gz
