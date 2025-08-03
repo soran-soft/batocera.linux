@@ -56,7 +56,7 @@ else # DIRECT_BUILD
 	IMAGE_NAME     ?= batocera.linux-build
 
 define RUN_DOCKER
-	$(DOCKER) run -t --init --rm \
+	$(DOCKER) run --init --rm \
 		-e HOME \
 		-v $(PROJECT_DIR):/build \
 		-v $(DL_DIR):/build/buildroot/dl \
