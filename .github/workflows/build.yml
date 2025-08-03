@@ -1,0 +1,37 @@
+name: Build and Download
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup environment
+        run: |
+          sudo apt update
+          sudo apt install build-essential
+
+      - name: Build Project
+        run: |
+          make vars
+          make batocera-docker-image
+          make x86_64-show-build-order
+          
+      - name: Create tarballs
+        run: | 
+          tar -czvf /tmp/dl.tar.gz dl
+          tar -czvf /tmp/output.tar.gz output
+
+      - name: Upload tarballs
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-tarballs
+          path: |
+            /tmp/dl.tar.gz
+            /tmp/output.tar.gz
