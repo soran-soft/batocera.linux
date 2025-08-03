@@ -22,6 +22,8 @@ jobs:
           make vars
           make batocera-docker-image
           make x86_64-show-build-order
+          make x86_64-pkg PKG=toolchain-buildroot
+          make x86_64-pkg PKG=toolchain
           
       - name: Create tarballs
         run: | 
